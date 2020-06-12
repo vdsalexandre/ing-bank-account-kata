@@ -11,7 +11,7 @@ import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IngKataUserStory3Test {
+public class AccountConsultingTest {
 
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private static final PrintStream originalOutput = System.out;

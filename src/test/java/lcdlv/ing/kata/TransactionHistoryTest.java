@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IngKataUserStory4Test {
+public class TransactionHistoryTest {
 
     // USER STORY 4 :
     // En tant que banque, j'offre la possibilité à mon client de consulter
