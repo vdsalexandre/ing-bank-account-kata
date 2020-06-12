@@ -87,15 +87,15 @@ public class IngKataTest {
         assertThat(account.getBalance()).isEqualTo(balance - amount);
     }
 
-    @Test
-    void returns_true_when_client_withdraws_all_from_his_account() throws WithdrawException {
-        double amount = 20.00;
+    @ParameterizedTest
+    @ValueSource(doubles = {20, 19.99, 5, 1})
+    void returns_true_when_client_withdraws_amounts_from_his_account(double amount) throws WithdrawException {
         double balance = 20.00;
 
         Account account = new Account(balance);
         account.withdraw(amount);
 
-        assertThat(account.getBalance()).isEqualTo(0);
+        assertThat(account.getBalance()).isBetween(0.0, balance);
     }
 
     @ParameterizedTest
