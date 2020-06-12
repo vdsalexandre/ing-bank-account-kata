@@ -18,10 +18,10 @@ public class TransactionHistoryTest {
     @Test
     void returns_true_when_transaction_history_is_equal_to_expected_transaction_history() throws WithdrawException, WrongAmountException {
         List<Transaction> expectedHistory = Arrays.asList(
-                new Transaction(Transaction.DEPOSIT, 100.00),
-                new Transaction(Transaction.WITHDRAW, 25.00),
-                new Transaction(Transaction.WITHDRAW, 11.00),
-                new Transaction(Transaction.DEPOSIT, 125.50)
+                new Transaction(Transaction.DEPOSIT, new Amount(100.00)),
+                new Transaction(Transaction.WITHDRAW, new Amount(25.00)),
+                new Transaction(Transaction.WITHDRAW, new Amount(11.00)),
+                new Transaction(Transaction.DEPOSIT, new Amount(125.50))
         );
 
         Account account = new Account(new Amount(100.00));

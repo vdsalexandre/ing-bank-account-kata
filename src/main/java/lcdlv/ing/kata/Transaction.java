@@ -7,9 +7,9 @@ public class Transaction {
     public static final String WITHDRAW = "withdraw";
 
     private String type;
-    private double amount;
+    private Amount amount;
 
-    public Transaction(String type, double amount) {
+    public Transaction(String type, Amount amount) {
         this.type = type;
         this.amount = amount;
     }
@@ -18,8 +18,8 @@ public class Transaction {
         return type;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getTransactionAmount() {
+        return amount.getAmount();
     }
 
     @Override
@@ -27,8 +27,8 @@ public class Transaction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return Double.compare(that.amount, amount) == 0 &&
-                type.equals(that.type);
+        return type.equals(that.type) &&
+                Objects.equals(amount, that.amount);
     }
 
     @Override
