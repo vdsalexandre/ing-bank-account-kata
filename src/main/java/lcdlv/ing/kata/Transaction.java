@@ -3,18 +3,18 @@ package lcdlv.ing.kata;
 import java.util.Objects;
 
 public class Transaction {
-    public static final String DEPOSIT = "deposit";
-    public static final String WITHDRAW = "withdraw";
+//    public static final String DEPOSIT = "deposit";
+//    public static final String WITHDRAW = "withdraw";
 
-    private String type;
+    private TransactionType type;
     private Amount amount;
 
-    public Transaction(String type, Amount amount) {
+    public Transaction(TransactionType type, Amount amount) {
         this.type = type;
         this.amount = amount;
     }
 
-    public String getType() {
+    public TransactionType getType() {
         return type;
     }
 
