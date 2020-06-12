@@ -1,5 +1,6 @@
 package lcdlv.ing.kata;
 
+import lcdlv.ing.kata.exception.WithdrawException;
 import lcdlv.ing.kata.exception.WrongAmountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -76,7 +77,7 @@ public class IngKataTest {
     // s'il n'utilise pas le découvert
 
     @Test
-    void returns_true_when_client_withdraws_one_from_not_empty_account() {
+    void returns_true_when_client_withdraws_one_from_not_empty_account() throws WithdrawException {
         double amount = 1.00;
         double balance = 10.00;
 
@@ -87,7 +88,7 @@ public class IngKataTest {
     }
 
     @Test
-    void returns_true_when_client_withdraws_all_from_his_account() {
+    void returns_true_when_client_withdraws_all_from_his_account() throws WithdrawException {
         double amount = 20.00;
         double balance = 20.00;
 
@@ -95,5 +96,16 @@ public class IngKataTest {
         account.withdraw(amount);
 
         assertThat(account.getBalance()).isEqualTo(0);
+    }
+
+    @Test
+    void throws_withdraw_exception_when_the_amount_took_of_is_bigger_than_account_balance() {
+        double amount = 20.00;
+        double balance = 12.50;
+
+        Account account = new Account(balance);
+        assertThatThrownBy(() -> account.withdraw(amount)).isInstanceOf(WithdrawException.class)
+                .hasMessage("Withdraw error ! You don't have enough in your account");
+
     }
 }

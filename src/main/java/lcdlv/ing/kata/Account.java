@@ -1,5 +1,6 @@
 package lcdlv.ing.kata;
 
+import lcdlv.ing.kata.exception.WithdrawException;
 import lcdlv.ing.kata.exception.WrongAmountException;
 
 public class Account {
@@ -22,7 +23,8 @@ public class Account {
         return balance;
     }
 
-    public void withdraw(double amount) {
+    public void withdraw(double amount) throws WithdrawException {
+        if (amount > this.balance) throw new WithdrawException("Withdraw error ! You don't have enough in your account");
         this.balance -= amount;
     }
 }
