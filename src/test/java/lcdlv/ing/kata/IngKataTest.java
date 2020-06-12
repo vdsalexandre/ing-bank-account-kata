@@ -98,9 +98,9 @@ public class IngKataTest {
         assertThat(account.getBalance()).isEqualTo(0);
     }
 
-    @Test
-    void throws_withdraw_exception_when_the_amount_took_of_is_bigger_than_account_balance() {
-        double amount = 20.00;
+    @ParameterizedTest
+    @ValueSource(doubles = {13, -1, 0, 0.009})
+    void throws_withdraw_exception_when_the_amount_took_of_is_bigger_than_account_balance(double amount) {
         double balance = 12.50;
 
         Account account = new Account(balance);
