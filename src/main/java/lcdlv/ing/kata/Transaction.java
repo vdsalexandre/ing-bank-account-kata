@@ -14,6 +14,14 @@ public class Transaction {
         this.amount = amount;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
