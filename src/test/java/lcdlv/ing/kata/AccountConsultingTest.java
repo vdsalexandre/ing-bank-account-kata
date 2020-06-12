@@ -60,13 +60,13 @@ public class AccountConsultingTest {
         Account account = new Account(new Amount(35.50));
         System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
 
-        account.withdraw(7.25);
+        account.withdraw(new Amount(7.25));
         System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
 
         account.deposit(new Amount(21.75));
         System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
 
-        account.withdraw(37.30);
+        account.withdraw(new Amount(37.30));
         System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
 
         assertThat(output.toString()).isEqualTo(expectedConsoleMessage);

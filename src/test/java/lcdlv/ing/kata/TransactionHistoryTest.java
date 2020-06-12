@@ -25,8 +25,8 @@ public class TransactionHistoryTest {
         );
 
         Account account = new Account(new Amount(100.00));
-        account.withdraw(25.00);
-        account.withdraw(11.00);
+        account.withdraw(new Amount(25.00));
+        account.withdraw(new Amount(11.00));
         account.deposit(new Amount(125.50));
 
         List<Transaction> transactionHistory = account.getTransactionHistory();

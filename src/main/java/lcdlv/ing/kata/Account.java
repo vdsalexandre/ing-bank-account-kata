@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Account {
-    private static final double MIN_AMOUNT = 0.01;
     private List<Transaction> transactions = new ArrayList<>();
 
     public Account() { }
@@ -31,9 +30,9 @@ public class Account {
         return balance.get();
     }
 
-    public void withdraw(double amount) throws WithdrawException {
-        if (amount > getBalance() || amount < MIN_AMOUNT) throw new WithdrawException("Withdraw error ! You don't have enough in your account");
-        this.transactions.add(new Transaction(Transaction.WITHDRAW, amount));
+    public void withdraw(Amount amount) throws WithdrawException {
+        if (amount.getAmount() > getBalance()) throw new WithdrawException("Withdraw error ! You don't have enough in your account");
+        this.transactions.add(new Transaction(Transaction.WITHDRAW, amount.getAmount()));
     }
 
     public List<Transaction> getTransactionHistory() {
