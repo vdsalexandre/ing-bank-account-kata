@@ -85,4 +85,15 @@ public class IngKataTest {
 
         assertThat(account.getBalance()).isEqualTo(balance - amount);
     }
+
+    @Test
+    void returns_true_when_client_withdraws_all_from_his_account() {
+        double amount = 20.00;
+        double balance = 20.00;
+
+        Account account = new Account(balance);
+        account.withdraw(amount);
+
+        assertThat(account.getBalance()).isEqualTo(0);
+    }
 }
