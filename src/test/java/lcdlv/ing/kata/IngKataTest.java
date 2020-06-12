@@ -99,13 +99,12 @@ public class IngKataTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {13, -1, 0, 0.009})
-    void throws_withdraw_exception_when_the_amount_took_of_is_bigger_than_account_balance(double amount) {
+    @ValueSource(doubles = {13, -1, 0, 0.009, 12.51})
+    void throws_withdraw_exception_when_the_amount_withdraw_is_wrong(double amount) {
         double balance = 12.50;
 
         Account account = new Account(balance);
         assertThatThrownBy(() -> account.withdraw(amount)).isInstanceOf(WithdrawException.class)
                 .hasMessage("Withdraw error ! You don't have enough in your account");
-
     }
 }
