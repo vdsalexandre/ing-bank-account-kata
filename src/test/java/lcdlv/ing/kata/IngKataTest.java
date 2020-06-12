@@ -51,11 +51,22 @@ public class IngKataTest {
     }
 
     @Test
-    void throw_amount_exception_when_the_amount_deposit_is_wrong() {
+    void throws_amount_exception_when_the_amount_deposit_is_wrong() {
         double amount = -25;
 
         Account account = new Account();
         assertThatThrownBy(() -> account.deposit(amount)).isInstanceOf(WrongAmountException.class)
-                    .hasMessage("Wrong amount ! Amount must be greater than 0 €");
+                    .hasMessage("Wrong amount ! Amount must be greater or equals than 0.1 €");
+    }
+
+    @Test
+    void returns_true_when_client_deposits_limit_amount_in_his_account_and_the_balance_is_correct() throws WrongAmountException {
+        double amount = 0.1;
+        double limitAmount = 0.1;
+
+        Account account = new Account();
+        account.deposit(amount);
+
+        assertThat(account.getBalance()).isEqualTo(limitAmount);
     }
 }
