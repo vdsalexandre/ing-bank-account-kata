@@ -1,11 +1,13 @@
 package lcdlv.ing.kata;
 
 public class Account {
-    public void deposit(double amount) {
+    private double balance;
 
+    public void deposit(double amount) {
+        this.balance = amount;
     }
 
     public double getBalance() {
-        return 0;
+        return balance;
     }
 }

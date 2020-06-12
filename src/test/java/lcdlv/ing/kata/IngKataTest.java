@@ -24,4 +24,14 @@ public class IngKataTest {
 
         assertThat(account.getBalance()).isEqualTo(0.0);
     }
+
+    @Test
+    void returns_true_when_client_deposits_an_amount_in_his_account_and_is_equals_to_the_account_balance() {
+        double amount = 10.50;
+
+        Account account = new Account();
+        account.deposit(amount);
+
+        assertThat(account.getBalance()).isEqualTo(amount);
+    }
 }
