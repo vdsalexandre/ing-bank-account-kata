@@ -10,7 +10,7 @@ public class Account {
     }
 
     public void deposit(double amount) throws WrongAmountException {
-        if (amount < 0.01) throw new WrongAmountException("Wrong amount ! Amount must be greater or equals than 0.01 €");
+        if (amount < 0.01) throw new WrongAmountException("Wrong amount ! Amount must be greater or equal to 0.01 €");
         this.balance += amount;
     }
 

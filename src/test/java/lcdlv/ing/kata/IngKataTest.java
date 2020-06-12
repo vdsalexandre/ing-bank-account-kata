@@ -57,7 +57,7 @@ public class IngKataTest {
     void throws_amount_exception_when_the_amount_deposit_is_wrong(double amount) {
         Account account = new Account();
         assertThatThrownBy(() -> account.deposit(amount)).isInstanceOf(WrongAmountException.class)
-                    .hasMessage("Wrong amount ! Amount must be greater or equals than 0.01 €");
+                    .hasMessage("Wrong amount ! Amount must be greater or equal to 0.01 €");
     }
 
     @Test
