@@ -2,6 +2,8 @@ package lcdlv.ing.kata;
 
 import lcdlv.ing.kata.exception.WrongAmountException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -50,19 +52,18 @@ public class IngKataTest {
         assertThat(account.getBalance()).isEqualTo(finalAmount);
     }
 
-    @Test
-    void throws_amount_exception_when_the_amount_deposit_is_wrong() {
-        double amount = -25;
-
+    @ParameterizedTest
+    @ValueSource(doubles = {-25, 0, -0.1, 0.009})
+    void throws_amount_exception_when_the_amount_deposit_is_wrong(double amount) {
         Account account = new Account();
         assertThatThrownBy(() -> account.deposit(amount)).isInstanceOf(WrongAmountException.class)
-                    .hasMessage("Wrong amount ! Amount must be greater or equals than 0.1 €");
+                    .hasMessage("Wrong amount ! Amount must be greater or equals than 0.01 €");
     }
 
     @Test
     void returns_true_when_client_deposits_limit_amount_in_his_account_and_the_balance_is_correct() throws WrongAmountException {
-        double amount = 0.1;
-        double limitAmount = 0.1;
+        double amount = 0.01;
+        double limitAmount = 0.01;
 
         Account account = new Account();
         account.deposit(amount);
