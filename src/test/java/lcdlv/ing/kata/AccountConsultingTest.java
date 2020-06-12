@@ -15,7 +15,6 @@ public class AccountConsultingTest {
 
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private static final PrintStream originalOutput = System.out;
-    private static final String s = System.lineSeparator();
 
     // USER STORY 3 :
     // En tant que banque, j'offre la possibilité à mon client de consulter le solde de son compte
@@ -52,22 +51,13 @@ public class AccountConsultingTest {
 
     @Test
     void returns_true_when_balance_console_message_is_correct_after_some_withdraws_and_deposits() throws WithdrawException, WrongAmountException {
-        String expectedConsoleMessage = "Your balance is 35,50 €" + s +
-                                        "Your balance is 28,25 €" + s +
-                                        "Your balance is 50,00 €" + s +
-                                        "Your balance is 12,70 €" + s;
+        String expectedConsoleMessage = "Your balance is 12,70 €";
 
         Account account = new Account(new Amount(35.50));
-        System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
-
         account.withdraw(new Amount(7.25));
-        System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
-
         account.deposit(new Amount(21.75));
-        System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
-
         account.withdraw(new Amount(37.30));
-        System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
+        System.out.print("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
 
         assertThat(output.toString()).isEqualTo(expectedConsoleMessage);
     }
