@@ -63,7 +63,7 @@ public class AccountConsultingTest {
         account.withdraw(7.25);
         System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
 
-        account.deposit(21.75);
+        account.deposit(new Amount(21.75));
         System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
 
         account.withdraw(37.30);

@@ -1,7 +1,6 @@
 package lcdlv.ing.kata;
 
 import lcdlv.ing.kata.exception.WithdrawException;
-import lcdlv.ing.kata.exception.WrongAmountException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +16,9 @@ public class Account {
         this.transactions.add(new Transaction(Transaction.DEPOSIT, balance));
     }
 
-    public void deposit(double amount) throws WrongAmountException {
-        if (amount < MIN_AMOUNT) throw new WrongAmountException("Wrong amount ! Amount must be greater or equal to 0.01 €");
-        this.transactions.add(new Transaction(Transaction.DEPOSIT, amount));
+    public void deposit(Amount amount) {
+//        if (amount.getAmount() < MIN_AMOUNT) throw new WrongAmountException("Wrong amount ! Amount must be greater or equal to 0.01 €");
+        this.transactions.add(new Transaction(Transaction.DEPOSIT, amount.getAmount()));
     }
 
     public double getBalance() {
