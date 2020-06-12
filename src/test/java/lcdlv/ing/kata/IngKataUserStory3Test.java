@@ -12,14 +12,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IngKataUserStory3Test {
 
-    private static final ByteArrayOutputStream output = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private static final PrintStream originalOutput = System.out;
 
     // USER STORY 3 :
     // En tant que banque, j'offre la possibilité à mon client de consulter le solde de son compte
 
-    @BeforeAll
-    public static void initOutStream() {
+    @BeforeEach
+    public void initOutStream() {
         System.setOut(new PrintStream(output));
     }
 
@@ -32,6 +32,16 @@ public class IngKataUserStory3Test {
     void returns_true_when_client_check_his_empty_account() {
         String expectedConsoleMessage = "Your balance is 0.0 €";
         Account account = new Account();
+
+        System.out.print("Your balance is " + account.getBalance() + " €");
+
+        assertThat(output.toString()).isEqualTo(expectedConsoleMessage);
+    }
+
+    @Test
+    void returns_true_when_client_check_his_non_empty_account() {
+        String expectedConsoleMessage = "Your balance is 15.25 €";
+        Account account = new Account(15.25);
 
         System.out.print("Your balance is " + account.getBalance() + " €");
 
