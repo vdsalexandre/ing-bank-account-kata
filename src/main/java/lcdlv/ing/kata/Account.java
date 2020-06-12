@@ -9,6 +9,10 @@ public class Account {
         this.balance = 0;
     }
 
+    public Account(double balance) {
+        this.balance = balance;
+    }
+
     public void deposit(double amount) throws WrongAmountException {
         if (amount < 0.01) throw new WrongAmountException("Wrong amount ! Amount must be greater or equal to 0.01 €");
         this.balance += amount;
@@ -16,5 +20,9 @@ public class Account {
 
     public double getBalance() {
         return balance;
+    }
+
+    public void withdraw(double amount) {
+        this.balance -= amount;
     }
 }

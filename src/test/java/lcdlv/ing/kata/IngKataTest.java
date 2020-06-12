@@ -70,4 +70,19 @@ public class IngKataTest {
 
         assertThat(account.getBalance()).isEqualTo(limitAmount);
     }
+
+    // USER STORY 2 :
+    // En tant que banque, j'accepte le retrait d'argent d'un client depuis son compte,
+    // s'il n'utilise pas le découvert
+
+    @Test
+    void returns_true_when_client_withdraws_one_from_not_empty_account() {
+        double amount = 1.00;
+        double balance = 10.00;
+
+        Account account = new Account(balance);
+        account.withdraw(amount);
+
+        assertThat(account.getBalance()).isEqualTo(balance - amount);
+    }
 }
