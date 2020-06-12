@@ -41,9 +41,9 @@ public class AccountConsultingTest {
     }
 
     @Test
-    void returns_true_when_client_check_his_non_empty_account() {
+    void returns_true_when_client_check_his_non_empty_account() throws WrongAmountException {
         String expectedConsoleMessage = "Your balance is 15.25 €";
-        Account account = new Account(15.25);
+        Account account = new Account(new Amount(15.25));
 
         System.out.print("Your balance is " + account.getBalance() + " €");
 
@@ -57,7 +57,7 @@ public class AccountConsultingTest {
                                         "Your balance is 50,00 €" + s +
                                         "Your balance is 12,70 €" + s;
 
-        Account account = new Account(35.50);
+        Account account = new Account(new Amount(35.50));
         System.out.println("Your balance is " + String.format("%.2f", account.getBalance()) + " €");
 
         account.withdraw(7.25);

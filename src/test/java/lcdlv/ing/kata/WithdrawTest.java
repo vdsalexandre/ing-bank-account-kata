@@ -1,6 +1,7 @@
 package lcdlv.ing.kata;
 
 import lcdlv.ing.kata.exception.WithdrawException;
+import lcdlv.ing.kata.exception.WrongAmountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,33 +16,28 @@ public class WithdrawTest {
     // s'il n'utilise pas le découvert
 
     @Test
-    void returns_true_when_client_withdraws_one_from_not_empty_account() throws WithdrawException {
+    void returns_true_when_client_withdraws_one_from_not_empty_account() throws WithdrawException, WrongAmountException {
         double amount = 1.00;
-        double balance = 10.00;
 
-        Account account = new Account(balance);
+        Account account = new Account(new Amount(10.00));
         account.withdraw(amount);
 
-        assertThat(account.getBalance()).isEqualTo(balance - amount);
+        assertThat(account.getBalance()).isEqualTo(10.00 - amount);
     }
 
     @ParameterizedTest
     @ValueSource(doubles = {20, 19.99, 5, 1})
-    void returns_true_when_client_withdraws_amounts_from_his_account(double amount) throws WithdrawException {
-        double balance = 20.00;
-
-        Account account = new Account(balance);
+    void returns_true_when_client_withdraws_amounts_from_his_account(double amount) throws WithdrawException, WrongAmountException {
+        Account account = new Account(new Amount(20.00));
         account.withdraw(amount);
 
-        assertThat(account.getBalance()).isBetween(0.0, balance);
+        assertThat(account.getBalance()).isBetween(0.0, 20.00);
     }
 
     @ParameterizedTest
     @ValueSource(doubles = {13, -1, 0, 0.009, 12.51})
-    void throws_withdraw_exception_when_the_amount_withdraw_is_wrong(double amount) {
-        double balance = 12.50;
-
-        Account account = new Account(balance);
+    void throws_withdraw_exception_when_the_amount_withdraw_is_wrong(double amount) throws WrongAmountException {
+        Account account = new Account(new Amount(12.50));
         assertThatThrownBy(() -> account.withdraw(amount)).isInstanceOf(WithdrawException.class)
                 .hasMessage("Withdraw error ! You don't have enough in your account");
     }

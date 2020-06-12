@@ -12,12 +12,11 @@ public class Account {
 
     public Account() { }
 
-    public Account(double balance) {
-        this.transactions.add(new Transaction(Transaction.DEPOSIT, balance));
+    public Account(Amount amount) {
+        this.transactions.add(new Transaction(Transaction.DEPOSIT, amount.getAmount()));
     }
 
     public void deposit(Amount amount) {
-//        if (amount.getAmount() < MIN_AMOUNT) throw new WrongAmountException("Wrong amount ! Amount must be greater or equal to 0.01 €");
         this.transactions.add(new Transaction(Transaction.DEPOSIT, amount.getAmount()));
     }
 
