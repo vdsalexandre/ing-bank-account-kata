@@ -1,5 +1,7 @@
 package lcdlv.ing.kata;
 
+import lcdlv.ing.kata.exception.WrongAmountException;
+
 public class Account {
     private double balance;
 
@@ -7,7 +9,8 @@ public class Account {
         this.balance = 0;
     }
 
-    public void deposit(double amount) {
+    public void deposit(double amount) throws WrongAmountException {
+        if (amount < 0.1) throw new WrongAmountException("Wrong amount ! Amount must be greater than 0 €");
         this.balance += amount;
     }
 
