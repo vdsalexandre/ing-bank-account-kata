@@ -3,9 +3,6 @@ package lcdlv.ing.kata;
 import java.util.Objects;
 
 public class Transaction {
-//    public static final String DEPOSIT = "deposit";
-//    public static final String WITHDRAW = "withdraw";
-
     private TransactionType type;
     private Amount amount;
 
@@ -18,8 +15,8 @@ public class Transaction {
         return type;
     }
 
-    public double getTransactionAmount() {
-        return amount.getAmount();
+    public Amount getAmount() {
+        return amount;
     }
 
     @Override

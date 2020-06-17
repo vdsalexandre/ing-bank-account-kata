@@ -1,6 +1,5 @@
 package lcdlv.ing.kata;
 
-import lcdlv.ing.kata.exception.WithdrawException;
 import lcdlv.ing.kata.exception.WrongAmountException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +39,7 @@ public class AccountConsultingTest {
     }
 
     @Test
-    void returns_true_when_client_check_his_non_empty_account() throws WrongAmountException {
+    void returns_true_when_client_check_his_non_empty_account() {
         String expectedConsoleMessage = "Your balance is 15.25 €";
         Account account = new Account(new Amount(15.25));
 
@@ -50,7 +49,7 @@ public class AccountConsultingTest {
     }
 
     @Test
-    void returns_true_when_balance_console_message_is_correct_after_some_withdraws_and_deposits() throws WithdrawException, WrongAmountException {
+    void returns_true_when_balance_console_message_is_correct_after_some_withdraws_and_deposits() throws WrongAmountException {
         String expectedConsoleMessage = "Your balance is 12,70 €";
 
         Account account = new Account(new Amount(35.50));

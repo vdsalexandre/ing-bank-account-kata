@@ -1,6 +1,5 @@
 package lcdlv.ing.kata;
 
-import lcdlv.ing.kata.exception.WithdrawException;
 import lcdlv.ing.kata.exception.WrongAmountException;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ public class TransactionHistoryTest {
     // l'historique des transactions sur son compte
 
     @Test
-    void returns_true_when_transaction_history_is_equal_to_expected_transaction_history() throws WithdrawException, WrongAmountException {
+    void returns_true_when_transaction_history_is_equal_to_expected_transaction_history() throws WrongAmountException {
         List<Transaction> expectedHistory = Arrays.asList(
                 new Transaction(DEPOSIT, new Amount(100.00)),
                 new Transaction(WITHDRAW, new Amount(25.00)),

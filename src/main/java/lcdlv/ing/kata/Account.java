@@ -1,10 +1,9 @@
 package lcdlv.ing.kata;
 
-import lcdlv.ing.kata.exception.WithdrawException;
+import lcdlv.ing.kata.exception.WrongAmountException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static lcdlv.ing.kata.TransactionType.DEPOSIT;
 import static lcdlv.ing.kata.TransactionType.WITHDRAW;
@@ -18,23 +17,24 @@ public class Account {
         this.transactions.add(new Transaction(DEPOSIT, amount));
     }
 
-    public void deposit(Amount amount) {
+    public void deposit(Amount amount) throws WrongAmountException {
+        if (amount.isSmallerThan(0.01)) throw new WrongAmountException("Wrong amount ! Amount must be greater or equal to 0.01 €");
         this.transactions.add(new Transaction(DEPOSIT, amount));
     }
 
     public double getBalance() {
-        AtomicReference<Double> balance = new AtomicReference<>((double) 0);
+        Amount balance = new Amount();
         transactions.forEach(t -> {
-                    if (t.getType().equals(DEPOSIT))
-                        balance.updateAndGet(b -> b + t.getTransactionAmount());
-                    else
-                        balance.updateAndGet(b -> b - t.getTransactionAmount());
-                });
-        return balance.get();
+            if (t.getType().equals(DEPOSIT))
+                balance.add(t.getAmount());
+            else
+                balance.sub(t.getAmount());
+        });
+        return balance.getAmount();
     }
 
-    public void withdraw(Amount amount) throws WithdrawException {
-        if (amount.getAmount() > getBalance()) throw new WithdrawException("Withdraw error ! You don't have enough in your account");
+    public void withdraw(Amount amount) throws WrongAmountException {
+        if (amount.isBiggerThan(getBalance()) || amount.isSmallerThan(0.01)) throw new WrongAmountException("Wrong amount ! You don't have enough in your account");
         this.transactions.add(new Transaction(WITHDRAW, amount));
     }
 

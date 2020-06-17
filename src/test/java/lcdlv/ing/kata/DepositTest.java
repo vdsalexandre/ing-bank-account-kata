@@ -1,6 +1,5 @@
 package lcdlv.ing.kata;
 
-import lcdlv.ing.kata.exception.WithdrawException;
 import lcdlv.ing.kata.exception.WrongAmountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,6 +1,5 @@
 package lcdlv.ing.kata;
 
-import lcdlv.ing.kata.exception.WithdrawException;
 import lcdlv.ing.kata.exception.WrongAmountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +15,7 @@ public class WithdrawTest {
     // s'il n'utilise pas le découvert
 
     @Test
-    void returns_true_when_client_withdraws_one_from_not_empty_account() throws WithdrawException, WrongAmountException {
+    void returns_true_when_client_withdraws_one_from_not_empty_account() throws WrongAmountException {
         Account account = new Account(new Amount(10.00));
         account.withdraw(new Amount(1.00));
 
@@ -25,7 +24,7 @@ public class WithdrawTest {
 
     @ParameterizedTest
     @ValueSource(doubles = {20, 19.99, 5, 1})
-    void returns_true_when_client_withdraws_amounts_from_his_account(double amount) throws WithdrawException, WrongAmountException {
+    void returns_true_when_client_withdraws_amounts_from_his_account(double amount) throws WrongAmountException {
         Account account = new Account(new Amount(20.00));
         account.withdraw(new Amount(amount));
 
@@ -34,8 +33,9 @@ public class WithdrawTest {
 
     @ParameterizedTest
     @ValueSource(doubles = {13, -1, 0, 0.009, 12.51})
-    void throws_exception_when_the_amount_withdraw_is_wrong(double amount) throws Exception {
+    void throws_exception_when_the_amount_withdrawn_is_wrong(double amount) {
         Account account = new Account(new Amount(12.50));
-        assertThatThrownBy(() -> account.withdraw(new Amount(amount))).isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> account.withdraw(new Amount(amount))).isInstanceOf(WrongAmountException.class)
+        .hasMessage("Wrong amount ! You don't have enough in your account");
     }
 }

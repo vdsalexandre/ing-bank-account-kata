@@ -1,20 +1,36 @@
 package lcdlv.ing.kata;
 
-import lcdlv.ing.kata.exception.WrongAmountException;
-
 import java.util.Objects;
 
 public class Amount {
-    private static final double MIN_AMOUNT = 0.01;
     private double amount;
 
-    public Amount(double amount) throws WrongAmountException {
-        if (amount < MIN_AMOUNT) throw new WrongAmountException("Wrong amount ! Amount must be greater or equal to 0.01 €");
+    public Amount() {
+        this.amount = 0.0;
+    }
+
+    public Amount(double amount) {
         this.amount = amount;
     }
 
     public double getAmount() {
         return amount;
+    }
+
+    public boolean isBiggerThan(double value) {
+        return amount > value;
+    }
+
+    public boolean isSmallerThan(double value) {
+        return amount < value;
+    }
+
+    public void add(Amount amount) {
+        this.amount += amount.getAmount();
+    }
+
+    public void sub(Amount amount) {
+        this.amount -= amount.getAmount();
     }
 
     @Override
